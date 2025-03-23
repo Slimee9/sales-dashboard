@@ -1,3 +1,5 @@
+
+
 import React from 'react'
 import 'remixicon/fonts/remixicon.css'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
@@ -39,8 +41,17 @@ const App = () => {
     { id: 4, name: " Smartwatches", popularity: 25, sales: "25%", color: "bg-orange-400" },
   ];
 
+  const last = [
+    { name: "Jan", volume: 400, services: 200 },
+    { name: "Feb", volume: 500, services: 250 },
+    { name: "Mar", volume: 450, services: 220 },
+    { name: "Apr", volume: 420, services: 210 },
+    { name: "May", volume: 300, services: 150 },
+    { name: "Jun", volume: 350, services: 180 },
+  ];
+
  return (
-    <div className='flex h-full bg-gray-200'>
+    <div className='flex h-full w-full  bg-gray-200'>
       
       
       <div className="side-bar w-64 bg-white shadow-md p-5">
@@ -61,8 +72,9 @@ const App = () => {
 
       
 
-      <main className='w-full p-6 flex flex-col gap-6'>
-      <nav className=" p-4 bg-white shadow-md">
+      <main className='h-full w-full p-6 flex flex-col gap-6'>
+        
+      <nav className="p-4 bg-white shadow-md flex flex-wrap justify-between items-center">
       <div className="flex items-center gap-4">
       <h1 className="text-2xl font-bold">Dashboard</h1>
         <input type="text" placeholder="Search here.." className=" flex p-2 w-2xl items-center justify-between bg-purple-100 rounded-md" />
@@ -100,7 +112,7 @@ const App = () => {
         </div>
         
 
-         <div className="grid grid-cols-3 gap-4 mt-6">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
           <div className=" total-rev p-4 bg-white rounded-md shadow-md">
             <h3 className="text-lg font-semibold mb-3">Total Revenue</h3>
             <ResponsiveContainer className="px-2 py-1" width="100%" height={200}>
@@ -148,7 +160,7 @@ const App = () => {
       </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         <div className="top-product bg-white p-4 rounded-xl shadow-md">
           <h2 className="text-lg font-semibold">Top Products</h2>
           <ul>
@@ -165,22 +177,30 @@ const App = () => {
         </div>
 
 
-          <div className="Target-vs-Reality bg-white p-4 rounded-lg shadow-md">
-        <h2 className="text-lg font-semibold mb-4">Target vs Reality</h2>
-        <ResponsiveContainer width="100%" height={200}>
-          <BarChart data={targetRealityData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            {/* <Legend /> */}
-            <Bar dataKey="reality" fill="green" />
-            <Bar dataKey="target" fill="yellow" />
-          </BarChart>
-        </ResponsiveContainer>
-        <h3 className=" flex gap-4  items-center justify-center text-lg font-semibold mb-3">Reality Sales <span className='font-bold text text-green-400'>$3,004</span>  Target Sales <span className='font-bold text-amber-400'>$4,504</span> </h3>
+        <div className="bg-white p-4 rounded-md shadow-md w-full max-w-md">
+      <h2 className="text-lg font-semibold text-gray-900 mb-2">Volume vs Service Level</h2>
 
+      <ResponsiveContainer width="100%" height={200}>
+        <BarChart data={last}>
+          <CartesianGrid strokeDasharray="1 1" />
+          
+          <Tooltip />
+          <Bar dataKey="services" stackId="a" fill="green" />
+          <Bar dataKey="volume" stackId="a" fill="blue" />
+        </BarChart>
+      </ResponsiveContainer>
+
+      <div className="flex justify-center gap-6 mt-3">
+        <div className="flex items-center gap-2">
+          <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+          <span className="text-gray-600">Volume</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+          <span className="text-gray-600">Services</span>
+        </div>
       </div>
+    </div>
         </div>
       </main>
       
